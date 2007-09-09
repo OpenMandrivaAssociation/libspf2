@@ -4,7 +4,7 @@
 Summary:	Libspf2 is an implementation of the SPF specification
 Name:		libspf2
 Version:	1.2.5
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.libspf2.org/
