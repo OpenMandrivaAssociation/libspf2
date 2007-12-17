@@ -10,7 +10,6 @@ Group:		System/Libraries
 URL:		http://www.libspf2.org/
 Source0:	http://www.libspf2.org/spf/%{name}-%{version}.tar.bz2
 Patch0:		libspf2-1.2.5-include_fix.diff
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 libspf2 is an implementation of the SPF (Sender Policy Framework)
