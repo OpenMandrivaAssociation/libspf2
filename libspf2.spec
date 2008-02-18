@@ -1,7 +1,7 @@
 %define	major 2
 %define libname	%mklibname spf %{major}
 
-Summary:	Libspf2 is an implementation of the SPF specification
+Summary:	Implementation of the SPF specification
 Name:		libspf2
 Version:	1.2.5
 Release:	%mkrel 5
@@ -26,7 +26,7 @@ a great deal of effort has been put into the regression tests.
 
 %if "%{_lib}" != "lib"
 %package -n	%{libname}
-Summary:	Libspf2 is an implementation of the SPF specification
+Summary:	Implementation of the SPF specification
 Group:		System/Libraries
 
 %description -n	%{libname}
