@@ -3,14 +3,13 @@
 
 Summary:	Implementation of the SPF specification
 Name:		libspf2
-Version:	1.2.5
-Release:	%mkrel 8
+Version:	1.2.9
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.libspf2.org/
-Source0:	http://www.libspf2.org/spf/%{name}-%{version}.tar.bz2
-Patch0:		libspf2-1.2.5-include_fix.diff
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+Source0:	http://www.libspf2.org/spf/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 libspf2 is an implementation of the SPF (Sender Policy Framework)
@@ -68,7 +67,6 @@ libspf2.
 %prep
 
 %setup -q
-%patch0 -p0
 
 %build
 
@@ -88,7 +86,7 @@ EOF
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall_std
 
@@ -112,16 +110,15 @@ cd -
 %endif
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
-%doc README Changelog docs/*.txt INSTALL LICENSES TODO
-%{_libdir}/lib*.so.*
+%doc README INSTALL LICENSES TODO
+%{_libdir}/lib*.so.%{major}*
 
 %files -n %{libname}-devel
 %defattr(-,root,root)
-%doc docs/API
 %{_libdir}/*.a
 %{_libdir}/*.la
 %{_libdir}/*.so
@@ -133,5 +130,3 @@ cd -
 %{_bindir}/spfquery2
 %{_bindir}/spftest2
 %{_bindir}/spf_example2
-
-
