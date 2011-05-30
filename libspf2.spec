@@ -4,7 +4,7 @@
 Summary:	Implementation of the SPF specification
 Name:		libspf2
 Version:	1.2.9
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.libspf2.org/
@@ -45,7 +45,8 @@ a great deal of effort has been put into the regression tests.
 Summary:	Development tools needed to build programs that use libspf2
 Group:		Development/C
 Requires:	%{libname} = %{version}
-Provides:	libspf-devel
+Provides:	%{libname}-devel
+Provides:	%{name}-devel
 
 %description -n	%{libname}-devel
 The libspf2-devel package contains the header files and static
