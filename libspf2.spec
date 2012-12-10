@@ -4,12 +4,11 @@
 Summary:	Implementation of the SPF specification
 Name:		libspf2
 Version:	1.2.9
-Release:	%mkrel 4
+Release:	5
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.libspf2.org/
 Source0:	http://www.libspf2.org/spf/%{name}-%{version}.tar.gz
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 libspf2 is an implementation of the SPF (Sender Policy Framework)
@@ -45,8 +44,8 @@ a great deal of effort has been put into the regression tests.
 Summary:	Development tools needed to build programs that use libspf2
 Group:		Development/C
 Requires:	%{libname} = %{version}
-Provides:	%{libname}-devel
-Provides:	%{name}-devel
+Provides:	%{libname}-devel = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
 
 %description -n	%{libname}-devel
 The libspf2-devel package contains the header files and static
@@ -102,32 +101,127 @@ cd  %{buildroot}%{_bindir}
     for f in *; do mv ${f} ${f}2; done
 cd -
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %doc README INSTALL LICENSES TODO
 %{_libdir}/lib*.so.%{major}*
 
 %files -n %{libname}-devel
-%defattr(-,root,root)
 %{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_includedir}/spf2
 
 %files -n spf2-utils
-%defattr(-,root,root)
 %{_bindir}/spfd2
 %{_bindir}/spfquery2
 %{_bindir}/spftest2
 %{_bindir}/spf_example2
+
+
+%changelog
+* Mon May 30 2011 Luis Daniel Lucio Quiroz <dlucio@mandriva.org> 1.2.9-4mdv2011.0
++ Revision: 681769
+- fix devel provides
+
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 1.2.9-3mdv2011.0
++ Revision: 620226
+- the mass rebuild of 2010.0 packages
+
+* Mon Sep 14 2009 Thierry Vignaud <tv@mandriva.org> 1.2.9-2mdv2010.0
++ Revision: 439444
+- rebuild
+
+* Tue Nov 04 2008 Oden Eriksson <oeriksson@mandriva.com> 1.2.9-1mdv2009.1
++ Revision: 299895
+- 1.2.9
+- drop redundant patches; P0
+
+* Sun Jul 27 2008 Thierry Vignaud <tv@mandriva.org> 1.2.5-8mdv2009.0
++ Revision: 250564
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Mon Feb 18 2008 Thierry Vignaud <tv@mandriva.org> 1.2.5-6mdv2008.1
++ Revision: 170957
+- rebuild
+- fix "foobar is blabla" summary (=> "blabla") so that it looks nice in rpmdrake
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Sun Sep 09 2007 Oden Eriksson <oeriksson@mandriva.com> 1.2.5-5mdv2008.0
++ Revision: 83757
+- rebuild
+
+
+* Fri Dec 08 2006 Oden Eriksson <oeriksson@mandriva.com> 1.2.5-4mdv2007.0
++ Revision: 93759
+- Import libspf2
+
+* Mon Jul 03 2006 Oden Eriksson <oeriksson@mandriva.com> 1.2.5-4mdv2007.0
+- added one patch by debian
+
+* Tue Oct 25 2005 Oden Eriksson <oeriksson@mandriva.com> 1.2.5-3mdk
+- fix #19226
+
+* Thu Mar 31 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.2.5-2mdk
+- install missing headers
+
+* Thu Mar 31 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.2.5-1mdk
+- 1.2.5
+- use the %%mkrel macro
+- remove the resolv patch, it's integrated upstream
+- cleaned up the spec file and used naming as in the libalsa2 package
+
+* Tue Feb 22 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.2.4-1mdk
+- 1.2.4
+
+* Sun Feb 20 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.2.1-1mdk
+- 1.2.1
+- remove the lowercase diff (P0)
+
+* Sat Jan 01 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.0.4-2mdk
+- make it build on amd64 (duh!)
+
+* Thu Oct 21 2004 Oden Eriksson <oeriksson@mandrakesoft.com> 1.0.4-1mdk
+- initial mandrake import
+
+* Tue Aug 17 2004 Paul Howarth <paul@city-fan.org> 1.0.4-7
+- Configure fix to find -lresolv on x64_64
+- Portability fixes for x64_64
+
+* Mon Aug 02 2004 Paul Howarth <paul@city-fan.org> 1.0.4-6
+- Fix case-sensitivity bug.
+
+* Thu Jul 29 2004 Paul Howarth <paul@city-fan.org> 1.0.4-5
+- Revert -pthread option as it didn't improve anything.
+
+* Wed Jul 28 2004 Paul Howarth <paul@city-fan.org> 1.0.4-4
+- Use `alternatives' so that the spfquery and spfd programs can co-exist
+  with versions from other implementations.
+- Ensure thread-safe operation by building with -pthread.
+
+* Fri Jul 16 2004 Paul Howarth <paul@city-fan.org> 1.0.4-3
+- Install the libtool library in the devel package so that
+  dependent libraries are found properly.
+- Use the libtool supplied with the package rather than the
+  system libtool.
+
+* Wed Jul 14 2004 Paul Howarth <paul@city-fan.org> 1.0.4-2
+- Cosmetic changes for building on Mandrake Linux
+- Require rpm-build >= 4.1.1 for building to avoid strange error messages
+  from old versions of rpm when they see %%check
+- Require glibc-devel and make for building
+- Require perl for building with checks enabled
+- Improved description text for the packages
+
+* Sat Jul 10 2004 Paul Howarth <paul@city-fan.org> 1.0.4-1
+- Update to 1.0.4
+- Added facility to build without running test suite
+  (rpmbuild --without checks)
+
+* Sun Jul 04 2004 Paul Howarth <paul@city-fan.org> 1.0.3-1
+- Initial RPM build.
+
