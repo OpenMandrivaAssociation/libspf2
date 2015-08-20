@@ -3,7 +3,7 @@
 
 Summary:	Implementation of the SPF specification
 Name:		libspf2
-Version:	1.2.9
+Version:	1.2.10
 Release:	6
 License:	BSD
 Group:		System/Libraries
