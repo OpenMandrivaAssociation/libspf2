@@ -7,7 +7,7 @@ Version:	1.2.10
 Release:	6
 License:	BSD
 Group:		System/Libraries
-URL:		http://www.libspf2.org/
+URL:		https://www.libspf2.org/
 Source0:	http://www.libspf2.org/spf/%{name}-%{version}.tar.gz
 
 %description
